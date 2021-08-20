@@ -1,0 +1,45 @@
+\chapter{Desenho da solução}
+
+Esse capítulo tem como objetivo descrever como foi desenvolvido e desenhado a solução proposta por esse trabalho, além de apresentar resultados obtidos durante o processo.
+
+\section{Validação e execução em ambiente real}
+
+Em novembro de 2019, no IFF Campos Centro, ocorreu o evento CITI, Congresso Integrado da Tecnologia da Informação. Ocorreram nesse evento atividades como palestras, minicursos e mesas redondas, atividades as quais necessitavam registro de presença dos participantes para geração dos certificados. Foi observado, pelos organizadores do evento, a necessidade de uma ferramenta para agilizar o registro dessas presenças. 
+
+Diante disso, foi desenvolvido pelos os autores deste trabalho um aplicativo para dispositivos com sistema operacional \textit{Android} para atender a essa necessidade, o qual também foi utilizado para validação e estudo de parte da solução proposta deste trabalho. O aplicativo foi desenvolvido utilizando a \textit{framework} para desenvolvimento híbrido \textit{Ionic}. No entanto, foi utilizado a técnica de \textit{Minimum Viable Product} (MVP), conforme descrito por \citeonline{ries2014lean}. O objetivo foi construir um aplicativo com recursos e funcionalidades mínimas, porém viáveis, para o processo de registro de presença no evento.
+
+Além do aplicativo, foi desenvolvida uma API, na linguagem PHP, que foi hospedada no servidor do IFF Campos Centro, onde possuía apenas uma rota, usando o verbo HTTP GET, para registrar a presença em um servidor SQL. Era armazenado os seguintes dados:
+
+\begin{itemize}
+    \item CPF do participante;
+    \item Nome do participante;
+    \item Identificador da atividade o qual está participando;
+    \item Data e hora do registro;
+    \item Nome do voluntário que está realizando o registro.
+\end{itemize}
+
+O registro era feito na entrada e saída da atividade, e a informação da data e hora do registro era usada para calcular posteriormente o tempo em que o participante ficou na atividade, ajudando na validação para a geração do certificado. Além de registrar utilizando a API, também era gerado um registro dessas presenças em um arquivo CSV no dispositivo do usuário, com a finalidade de haver um \textit{backup} em caso de perdas no banco de dados.
+
+O aplicativo era composto por duas telas. Na primeira tela, haviam dois campos, um de texto para o voluntário informar seu nome, e outro campo para o voluntário selecionar qual atividade vai ser registrada a presença. Abaixo haviam dois botões, um para prosseguir para a tela de leitura de \textit{QRCode} para registrar a presença do participante. O segundo botão abria o leitor de \textit{QRcode} do dispositivo \textit{Android} para registrar a presença de outro voluntário no dia do evento.
+
+Na segunda tela havia apenas um botão, ao qual abria o leitor de \textit{QRCode} para registrar a presença do participante. O \textit{QRCode} lido estava nos crachás de identificação dos participantes distribuídos durante o evento. No \textit{QRCode} contido nos crachás, havia a informação do nome do participante e CPF, o qual era capturado pelo aplicativo.
+
+<colocar imagem das telas aqui>
+
+\section{Análise do resultado da execução em ambiente real}
+
+Esse MVP foi utilizado por 12 discentes que formavam parte do comitê organizador do CITI. Ao final do evento, foi produzido e distribuído pelos autores deste trabalho um questionário avaliativo, utilizando a ferramenta \textit{Google Forms}, para esses discentes. Foram obtidas 11 respostas. Esse questionário teve como finalidade saber a opinião dos usuários quanto a usabilidade e solução proposta pelo aplicativo. O questionário possuía as seguintes perguntas:
+
+\begin{itemize}
+    \item A tela de credenciamento é intuitiva?
+    \item A tela de leitura do \textit{QRCode} é intuitiva?
+    \item De modo geral a aplicação foi de fácil utilização?
+    \item O arquivo de \textit{backup} local foi de fácil acesso?
+    \item Aplicação apresentou algum tipo de falha?
+    \item Caso apresentou falha, descreva.
+    \item Sugestões de melhorias
+\end{itemize}
+
+Com as respostas obtidas pelo formulário, foi observado que o \textit{layout} das telas foram bem aceito, com 100\% das respostas indicando que eram intuitivas e de fácil utilização. Não foi indicado nenhuma falha na utilização do aplicativo. Como sugestões, foi informado uma melhoria na funcionalidade de \textit{backup} e colocar mais imagens no aplicativo.
+
+<colocar imagem dos gráficos aqui>
