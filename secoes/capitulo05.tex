@@ -4,11 +4,11 @@ Esse capítulo tem como objetivo descrever como foi desenvolvido e desenhado a s
 
 \section{Validação e execução em ambiente real}
 
-Em novembro de 2019, no IFF Campos Centro, ocorreu o evento CITI, Congresso Integrado da Tecnologia da Informação. Ocorreram nesse evento atividades como palestras, minicursos e mesas redondas, atividades as quais necessitavam registro de presença dos participantes para geração dos certificados. Foi observado, pelos organizadores do evento, a necessidade de uma ferramenta para agilizar o registro dessas presenças. 
+Em novembro de 2019, no IFF Campos Centro, ocorreu o evento CITI. Ocorreram nesse evento atividades como palestras, minicursos e mesas redondas, atividades as quais necessitavam registro de presença dos participantes para geração dos certificados. Foi observado, pelos organizadores do evento, a necessidade de uma ferramenta para agilizar o registro dessas presenças. 
 
 Diante disso, foi desenvolvido pelos os autores deste trabalho um aplicativo para dispositivos com sistema operacional \textit{Android} para atender a essa necessidade, o qual também foi utilizado para validação e estudo de parte da solução proposta deste trabalho. O aplicativo foi desenvolvido utilizando a \textit{framework} para desenvolvimento híbrido \textit{Ionic}. No entanto, foi utilizado a técnica de \textit{Minimum Viable Product} (MVP), conforme descrito por \citeonline{ries2014lean}. O objetivo foi construir um aplicativo com recursos e funcionalidades mínimas, porém viáveis, para o processo de registro de presença no evento.
 
-Além do aplicativo, foi desenvolvida uma API, na linguagem PHP, que foi hospedada no servidor do IFF Campos Centro, onde possuía apenas uma rota, usando o verbo HTTP GET, para registrar a presença em um servidor SQL. Era armazenado os seguintes dados:
+Além do aplicativo, foi desenvolvida uma \textit{Application Programming Interface} (API), na linguagem PHP, que foi hospedada no servidor do IFF Campos Centro, onde possuía apenas uma rota, usando o verbo \textit{Hypertext Transfer Protocol} (HTTP) GET, para registrar a presença em um servidor \textit{Structured Query Language} (SQL). Era armazenado os seguintes dados:
 
 \begin{itemize}
     \item CPF do participante;
@@ -18,7 +18,7 @@ Além do aplicativo, foi desenvolvida uma API, na linguagem PHP, que foi hospeda
     \item Nome do voluntário que está realizando o registro.
 \end{itemize}
 
-O registro era feito na entrada e saída da atividade, e a informação da data e hora do registro era usada para calcular posteriormente o tempo em que o participante ficou na atividade, ajudando na validação para a geração do certificado. Além de registrar utilizando a API, também era gerado um registro dessas presenças em um arquivo CSV no dispositivo do usuário, com a finalidade de haver um \textit{backup} em caso de perdas no banco de dados.
+O registro era feito na entrada e saída da atividade, e a informação da data e hora do registro era usada para calcular posteriormente o tempo em que o participante ficou na atividade, ajudando na validação para a geração do certificado. Além de registrar utilizando a API, também era gerado um registro dessas presenças em um arquivo \textit{Comma-Separated Values} (CSV) no dispositivo do usuário, com a finalidade de haver um \textit{backup} em caso de perdas no banco de dados.
 
 O aplicativo era composto por duas telas. Na primeira tela, haviam dois campos, um de texto para o voluntário informar seu nome, e outro campo para o voluntário selecionar qual atividade vai ser registrada a presença. Abaixo haviam dois botões, um para prosseguir para a tela de leitura de \textit{QRCode} para registrar a presença do participante. O segundo botão abria o leitor de \textit{QRcode} do dispositivo \textit{Android} para registrar a presença de outro voluntário no dia do evento.
 
@@ -43,3 +43,25 @@ Esse MVP foi utilizado por 12 discentes que formavam parte do comitê organizado
 Com as respostas obtidas pelo formulário, foi observado que o \textit{layout} das telas foram bem aceito, com 100\% das respostas indicando que eram intuitivas e de fácil utilização. Não foi indicado nenhuma falha na utilização do aplicativo. Como sugestões, foi informado uma melhoria na funcionalidade de \textit{backup} e colocar mais imagens no aplicativo.
 
 <colocar imagem dos gráficos aqui>
+
+\section{Desenho da estrutura e funcionalidades}
+
+Após análise dos resultados obtidos com a utilização do aplicativo para credenciamento no CITI, foi iniciado a análise da plataforma Eventos IFF, onde foi avaliado as suas funcionalidades e quais funcionalidades poderiam ser acrescentadas com uma aplicação móvel, baseado na experiência obtida no CITI. Foram feitos levantamentos de requisitos para entendimento melhor da plataforma. 
+
+Ao finalizar essa etapa, foi desenhado \textit{wireframes} ilustrando as funcionalidades vistas inicialmente como relevantes para o aplicativo. Na Figura x é mostrado dois \textit{wireframes} desenvolvidos nessa etapa, o primeiro ilustrando a página principal do aplicativo e o segundo com a primeira estrutura idealizada para a funcionalidade de envio de perguntas para o palestrante.
+
+<colocar imagem dos wireframes>
+
+Com a definição das funcionalidades e requisitos, foram desenvolvidos os diagramas de caso de uso e de classe. Com esses diagramas, alguns impedimentos e correções nas funcionalidades inicialmente pensadas ficaram mais esclarecidas, o que foram corrigidas com novas revisões nos requisitos levantados e correções nos diagramas. Em seguida foi desenhada a arquitetura dessa solução, visando ilustrar como seria a comunicação entre os serviços do Eventos IFF com o website Eventos IFF e o aplicativo proposto por esse trabalho, além da comunicação com a plataforma \textit{Firebase}.
+
+<colocar imagem dos diagramas>
+
+\subsection{Uso do \textit{Firebase} na arquitetura}
+
+O \textit{Firebase} possui uma ferramenta, no qual é chamada de \textit{Firestore Database} ou \textit{Cloud Firestore}, onde consiste em um banco de dados não relacional, flexível e escalonável, que é indicado para desenvolvimento de dispositivos móveis, além de aplicações \textit{web} \cite{google_firebase}.
+
+O \textit{Firestore Database} oferece uma sincronia em tempo real entre o dispositivo cliente e o banco de dados. Isso é possível através de ouvintes que atuam no dispositivo cliente através da integração com o \textit{Firestore Database}, onde atualiza os dados no dispositivo cliente logo após sua mudança no banco de dados \cite{google_firebase}. Na Figura x é exibido um exemplo da estrutura de armazenamento do \textit{Firestore Database} na interface do \textit{Firebase}.
+
+<colocar imagem do firebase>
+
+Deste modo, para a funcionalidade de comentários na atividade do aplicativo Eventos IFF, essa sincronia em tempo real do \textit{Firestore Database} se torna fundamental para uma boa experiência do usuário, onde os novos comentários feitos por outros usuários na atividade são exibidos em tempo real para o usuário que estiver visualizando essa tela.
