@@ -42,26 +42,76 @@ Esse MVP foi utilizado por 12 discentes que formavam parte do comitê organizado
 
 Com as respostas obtidas pelo formulário, foi observado que o \textit{layout} das telas foram bem aceito, com 100\% das respostas indicando que eram intuitivas e de fácil utilização. Não foi indicado nenhuma falha na utilização do aplicativo. Como sugestões, foi informado uma melhoria na funcionalidade de \textit{backup} e colocar mais imagens no aplicativo.
 
-<colocar imagem dos gráficos aqui>
-
 \section{Desenho da estrutura e funcionalidades}
 
 Após análise dos resultados obtidos com a utilização do aplicativo para credenciamento no CITI, foi iniciado a análise da plataforma Eventos IFF, onde foi avaliado as suas funcionalidades e quais funcionalidades poderiam ser acrescentadas com uma aplicação móvel, baseado na experiência obtida no CITI. Foram feitos levantamentos de requisitos para entendimento melhor da plataforma. 
 
-Ao finalizar essa etapa, foi desenhado \textit{wireframes} ilustrando as funcionalidades vistas inicialmente como relevantes para o aplicativo. Na Figura x é mostrado dois \textit{wireframes} desenvolvidos nessa etapa, o primeiro ilustrando a página principal do aplicativo e o segundo com a primeira estrutura idealizada para a funcionalidade de envio de perguntas para o palestrante.
+Ao finalizar essa etapa, foi desenhado \textit{wireframes} ilustrando as funcionalidades vistas inicialmente como relevantes para o aplicativo. Na Figura \ref{fig:wireframe1} e \ref{fig:wireframe2} é mostrado dois \textit{wireframes} desenvolvidos nessa etapa, o primeiro ilustrando a página principal do aplicativo e o segundo com a primeira estrutura idealizada para a funcionalidade de envio de perguntas para o palestrante.
 
-<colocar imagem dos wireframes>
+% \begin{figure}[H]
+%   \begin{minipage}[b]{0.4\textwidth}
+%     \caption{Wireframe da tela inicial do aplicativo}
+%     \includegraphics[width=\textwidth]{figuras/wireframe1.PNG}
+%     \label{fig:wireframe1}
+%     \legend{Fonte: elaborado pelos autores}
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[b]{0.4\textwidth}
+%     \caption{Wireframe da tela de envio de comentários em atividade}
+%     \includegraphics[scale=0.37]{figuras/wireframe2.png}
+%     \label{fig:wireframe2}
+%     \legend{Fonte: elaborado pelos autores}
+%   \end{minipage}
+% \end{figure}
 
-Com a definição das funcionalidades e requisitos, foram desenvolvidos os diagramas de caso de uso e de classe. Com esses diagramas, alguns impedimentos e correções nas funcionalidades inicialmente pensadas ficaram mais esclarecidas, o que foram corrigidas com novas revisões nos requisitos levantados e correções nos diagramas. Em seguida foi desenhada a arquitetura dessa solução, visando ilustrar como seria a comunicação entre os serviços do Eventos IFF com o website Eventos IFF e o aplicativo proposto por esse trabalho, além da comunicação com a plataforma \textit{Firebase}.
+\begin{figure}[H]
+    \centering
+    \caption{\textit{Wireframe} da tela inicial do aplicativo}
+    \includegraphics[scale=0.81]{figuras/wireframe1.PNG}
+    \label{fig:wireframe1}
+    \legend{Fonte: elaborado pelos autores}
+\end{figure}
 
-<colocar imagem dos diagramas>
+\begin{figure}[H]
+    \centering
+    \caption{\textit{Wireframe} da tela de envio de comentários em atividade}
+    \includegraphics[scale=0.4]{figuras/wireframe2.png}
+    \label{fig:wireframe2}
+    \legend{Fonte: elaborado pelos autores}
+\end{figure}
+
+Com a definição das funcionalidades e requisitos, foram desenvolvidos os diagramas de caso de uso e de classe. Com esses diagramas, alguns impedimentos e correções nas funcionalidades inicialmente pensadas ficaram mais esclarecidas, o que foram corrigidas com novas revisões nos requisitos levantados e correções nos diagramas. Em seguida foi desenhada a arquitetura dessa solução, visando ilustrar como seria a comunicação entre os serviços do Eventos IFF com o \textit{website} Eventos IFF e o aplicativo proposto por esse trabalho, além da comunicação com a plataforma \textit{Firebase}.
+
+Nas Figuras \ref{fig:classe} é apresentado o diagrama de classe da aplicação. Na Figura \ref{fig:arquitetura} é ilustrada a arquitetura da integração do aplicativo com os serviços do Eventos IFF, assim como com o \textit{Firebase}.
+
+\begin{figure}[H]
+    \centering
+    \caption{Diagrama de classe}
+    \includegraphics[scale=0.4]{figuras/Diagrama-de-classe.jpg}
+    \label{fig:classe}
+    \legend{Fonte: elaborado pelos autores}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Arquitetura da integração do aplicativo com o Eventos IFF}
+    \includegraphics[scale=0.475]{figuras/Arquitetura.png}
+    \label{fig:arquitetura}
+    \legend{Fonte: elaborado pelos autores}
+\end{figure}
 
 \subsection{Uso do \textit{Firebase} na arquitetura}
 
 O \textit{Firebase} possui uma ferramenta, no qual é chamada de \textit{Firestore Database} ou \textit{Cloud Firestore}, onde consiste em um banco de dados não relacional, flexível e escalonável, que é indicado para desenvolvimento de dispositivos móveis, além de aplicações \textit{web} \cite{google_firebase}.
 
-O \textit{Firestore Database} oferece uma sincronia em tempo real entre o dispositivo cliente e o banco de dados. Isso é possível através de ouvintes que atuam no dispositivo cliente através da integração com o \textit{Firestore Database}, onde atualiza os dados no dispositivo cliente logo após sua mudança no banco de dados \cite{google_firebase}. Na Figura x é exibido um exemplo da estrutura de armazenamento do \textit{Firestore Database} na interface do \textit{Firebase}.
+O \textit{Firestore Database} oferece uma sincronia em tempo real entre o dispositivo cliente e o banco de dados. Isso é possível através de ouvintes que atuam no dispositivo cliente através da integração com o \textit{Firestore Database}, onde atualiza os dados no dispositivo cliente logo após sua mudança no banco de dados \cite{google_firebase}. Na Figura \ref{fig:firebase} é exibido um exemplo da estrutura de armazenamento do \textit{Firestore Database} na interface do \textit{Firebase}.
 
-<colocar imagem do firebase>
+\begin{figure}[H]
+    \centering
+    \caption{Interface do \textit{Firestore Database} no \textit{Firebase}}
+    \includegraphics[scale=0.5]{figuras/firebase.PNG}
+    \label{fig:firebase}
+    \legend{Fonte: \textit{website} do \textit{Firebase}}
+\end{figure}
 
 Deste modo, para a funcionalidade de comentários na atividade do aplicativo Eventos IFF, essa sincronia em tempo real do \textit{Firestore Database} se torna fundamental para uma boa experiência do usuário, onde os novos comentários feitos por outros usuários na atividade são exibidos em tempo real para o usuário que estiver visualizando essa tela.
