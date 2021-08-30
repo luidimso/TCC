@@ -20,11 +20,23 @@ Além do aplicativo, foi desenvolvida uma \textit{Application Programming Interf
 
 O registro era feito na entrada e saída da atividade, e a informação da data e hora do registro era usada para calcular posteriormente o tempo em que o participante ficou na atividade, ajudando na validação para a geração do certificado. Além de registrar utilizando a API, também era gerado um registro dessas presenças em um arquivo \textit{Comma-Separated Values} (CSV) no dispositivo do usuário, com a finalidade de haver um \textit{backup} em caso de perdas no banco de dados.
 
-O aplicativo era composto por duas telas. Na primeira tela, haviam dois campos, um de texto para o voluntário informar seu nome, e outro campo para o voluntário selecionar qual atividade vai ser registrada a presença. Abaixo haviam dois botões, um para prosseguir para a tela de leitura de \textit{QRCode} para registrar a presença do participante. O segundo botão abria o leitor de \textit{QRcode} do dispositivo \textit{Android} para registrar a presença de outro voluntário no dia do evento.
+O aplicativo era composto por duas telas. Na primeira tela, haviam dois campos, um de texto para o voluntário informar seu nome, e outro campo para o voluntário selecionar qual atividade vai ser registrada a presença. Abaixo haviam dois botões, um para prosseguir para a tela de leitura de \textit{QRCode} para registrar a presença do participante. O segundo botão abria o leitor de \textit{QRcode} do dispositivo \textit{Android} para registrar a presença de outro voluntário no dia do evento. Na Figura \ref{fig:mvp1} é apresentada esta tela.
 
-Na segunda tela havia apenas um botão, ao qual abria o leitor de \textit{QRCode} para registrar a presença do participante. O \textit{QRCode} lido estava nos crachás de identificação dos participantes distribuídos durante o evento. No \textit{QRCode} contido nos crachás, havia a informação do nome do participante e CPF, o qual era capturado pelo aplicativo.
+\begin{figure}[H]
+    \centering
+    \caption{Tela inicial do MVP} \includegraphics[scale=0.7]{figuras/mvp1.png}
+    \label{fig:mvp1}
+    \legend{Fonte: elaborado pelos autores}
+\end{figure}
 
-<colocar imagem das telas aqui>
+Na segunda tela havia apenas um botão, ao qual abria o leitor de \textit{QRCode} para registrar a presença do participante (Figura \ref{fig:mvp2}). O \textit{QRCode} lido estava nos crachás de identificação dos participantes distribuídos durante o evento. No \textit{QRCode} contido nos crachás, havia a informação do nome do participante e CPF, o qual era capturado pelo aplicativo.
+
+\begin{figure}[H]
+    \centering
+    \caption{Tela de leitura de \textit{QRCode} de credenciamento do MVP} \includegraphics[scale=0.7]{figuras/mvp2.png}
+    \label{fig:mvp2}
+    \legend{Fonte: elaborado pelos autores}
+\end{figure}
 
 \section{Análise do resultado da execução em ambiente real}
 
@@ -37,10 +49,10 @@ Esse MVP foi utilizado por 12 discentes que formavam parte do comitê organizado
     \item O arquivo de \textit{backup} local foi de fácil acesso?
     \item Aplicação apresentou algum tipo de falha?
     \item Caso apresentou falha, descreva.
-    \item Sugestões de melhorias
+    \item Sugestões de melhorias.
 \end{itemize}
 
-Com as respostas obtidas pelo formulário, foi observado que o \textit{layout} das telas foram bem aceito, com 100\% das respostas indicando que eram intuitivas e de fácil utilização. Não foi indicado nenhuma falha na utilização do aplicativo. Como sugestões, foi informado uma melhoria na funcionalidade de \textit{backup} e colocar mais imagens no aplicativo.
+Com as respostas obtidas pelo formulário, foi observado que o \textit{layout} das telas foram bem aceito, com 100\% das respostas indicando que eram intuitivas e de fácil utilização. Não foi indicado nenhuma falha na utilização do aplicativo. Como sugestões, foi informado uma melhoria na funcionalidade de \textit{backup} e colocar mais imagens no aplicativo. O formulário utilizado para a pesquisa de opinião está disponível no Apêndice \ref{apendice1}, assim como o resultado obtido pelo formulário, onde se encontra no Apêndice \ref{apendice2}.
 
 \section{Desenho da estrutura e funcionalidades}
 
