@@ -23,7 +23,7 @@ Na Figura \ref{fig:caso-de-uso} é ilustrado através do diagrama de uso as func
 \end{figure}
 
 
-Na Figura \ref{fig:digrama-classe} é apresentado o diagrama de classe conceitual, onde é ilustrado as principais entidades que compõem o aplicativo Eventos IFF e suas relações. Também é apresentado os 4 papeis que o usuário pode ter em relação a um evento, que são: audiência, organizador, palestrante e voluntário. Cada papel possui as funcionalidades que os usuários podem executar no aplicativo.
+Na Figura \ref{fig:digrama-classe} é apresentado o diagrama de classe conceitual, onde é ilustrado as principais entidades que compõem o aplicativo Eventos IFF e suas relações. Também é apresentado os 4 papéis que o usuário pode ter em relação a um evento, que são: audiência, organizador, palestrante e voluntário. Cada papel possui as funcionalidades que os usuários podem executar no aplicativo.
 
 \begin{figure}[H]
     \centering
@@ -33,6 +33,12 @@ Na Figura \ref{fig:digrama-classe} é apresentado o diagrama de classe conceitua
     \label{fig:digrama-classe}
     \legend{Fonte: elaborado pelos autores}
 \end{figure}
+
+Em síntese à Figura \ref{fig:digrama-classe}, os papéis de organizador, palestrante e voluntário pertencem a administração do evento, concomitantemente o papel de audiência é o perfil padrão do utilizador da aplicação móvel.
+
+Cada usuário tem a possibilidade de se inscrever a inúmeras atividades pertencentes aos respectivos eventos, assim como cada evento deve conter no mínimo um organizador, entretanto não há restrição na quantidade de palestrantes e voluntários.
+
+Além disso o evento, tem a possibilidade de receber a inscrição de ilimitados participantes, contudo a atividade tem uma limitação, a qual está sujeita a configuração realizada pelo organizador do evento na atividade. Comentários somente podem ser realizados nas atividades, e estão passíveis de denúncias caso não estejam de acordo com a atividade.
 
 \section{Validação e execução em ambiente real}
 
@@ -132,7 +138,7 @@ Ao finalizar essa etapa, foi desenhado \textit{wireframes} ilustrando as funcion
 
 Com a definição das funcionalidades e requisitos, foram desenvolvidos os diagramas de caso de uso e de classe. Com esses diagramas, alguns impedimentos e correções nas funcionalidades inicialmente pensadas ficaram mais esclarecidas, o que foram corrigidas com novas revisões nos requisitos levantados e correções nos diagramas. Em seguida foi desenhada a arquitetura dessa solução, visando ilustrar como seria a comunicação entre os serviços do Eventos IFF com o \textit{website} Eventos IFF e o aplicativo proposto por esse trabalho, além da comunicação com a plataforma \textit{Firebase}.
 
-Nas Figuras \ref{fig:classe} é apresentado o diagrama de classe da aplicação. Na Figura \ref{fig:arquitetura} é ilustrada a arquitetura da integração do aplicativo com os serviços do Eventos IFF, assim como com o \textit{Firebase}.
+Na Figura \ref{fig:classe} é apresentado o diagrama de classe da aplicação. Na Figura \ref{fig:arquitetura} é ilustrada a arquitetura da integração do aplicativo com os serviços do Eventos IFF, assim como com o \textit{Firebase}.
 
 \begin{figure}[H]
     \centering
@@ -143,6 +149,15 @@ Nas Figuras \ref{fig:classe} é apresentado o diagrama de classe da aplicação.
     \legend{Fonte: elaborado pelos autores}
 \end{figure}
 
+Em vista a Figura \ref{fig:classe}, os papéis de organizador, palestrante, voluntário e audiência estão contidos na classe enumeradora Perfil, esta classe se relaciona com UsuarioEvento, definindo assim os seus acessos através do perfil cadastrado.
+
+Salienta-se que cada classe Usuário tem uma classe Pessoa, não existindo assim duplicidade. Assim como não há duplicidade de Usuário em Evento, visto que a relação entre as classe Usuário e a classe Evento é gerenciada pela classe UsuarioEvento, sendo assim a resultante do relacionamento é chave única atribuída evitando duplicidade e impossibilitando atribuição de mais de um perfil pela classe enumeradora Perfil.
+
+Já a classe Evento tem a possibilidade de ter inúmeras atividades, com inúmeros usuários e inúmeros comentários. Acrescente-se que os comentários possuem a funcionalidade avaliar, esta a qual possibilita o usuário da aplicação de avaliar o comentário tanto positivamente quanto negativamente, objetivando evidenciar os comentários melhor avaliados.
+
+Além de avaliação, o comentário pode ter uma ou mais denuncias criadas pelos usuários. Esta funcionalidade tem como objetivo facilitar a administração do evento quanto a comportamentos impróprios na plataforma. Essa funcionalidade é gerenciada pela classe Denuncia, que possui o método denunciarComentario.
+
+
 \begin{figure}[H]
     \centering
     \caption{Arquitetura da integração do aplicativo com o Eventos IFF}
@@ -152,7 +167,13 @@ Nas Figuras \ref{fig:classe} é apresentado o diagrama de classe da aplicação.
     \legend{Fonte: elaborado pelos autores}
 \end{figure}
 
-\subsection{Uso do \textit{Firebase} na arquitetura}
+Na Figura \ref{fig:arquitetura} é ilustrado a comunicação entre o aplicativo móvel e os serviços do Eventos IFF. A comunicação é feita através de uma API. A API tem como objetivo disponibilizar as funcionalidades e serviços que o Eventos IFF possui, onde foram descritas no Capítulo \ref{cap:eventosiff}. Com isso, o aplicativo poderá estender a plataforma \textit{web} através da aplicação móvel.
+
+Paralelamente, a arquitetura desenhada tem como objetivo agregar funcionalidades e eficiência pelo aplicativo móvel. Visando isso, como ilustrado na Figura \ref{fig:arquitetura}, o aplicativo também se comunica com a plataforma \textit{Firebase}. O uso e funcionamento do \textit{Firebase} é descrito na Seção \ref{sec:firebase}. Esta comunicação possibilita a implementação das funcionalidades de comentários em atividades e notificações dos eventos, possibilitando que o aplicativo móvel agregue funcionalidades ao processo de gestão de eventos do Eventos IFF, além de possibilitar uma maior interatividade com os usuários através dessas funcionalidades.
+
+Além disso, considerando que o \textit{Firebase} tem como benefício a sua resposta em tempo real, essa característica possibilita que a funcionalidade de credenciamento em atividades se torne mais dinâmica e ágil utilizando o \textit{Firebase} como ilustrado na Figura \ref{fig:arquitetura}. Os dados dos credenciamentos podem ser enviados para o Eventos IFF posteriormente através de sua API.
+
+\subsection{Uso do \textit{Firebase} na arquitetura} \label{sec:firebase}
 
 O \textit{Firebase} possui uma ferramenta, no qual é chamada de \textit{Firestore Database} ou \textit{Cloud Firestore}, onde consiste em um banco de dados não relacional, flexível e escalonável, que é indicado para desenvolvimento de dispositivos móveis, além de aplicações \textit{web} \cite{google_firebase}.
 
